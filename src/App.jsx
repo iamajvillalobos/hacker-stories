@@ -3,7 +3,7 @@ import * as React from "react";
 const title = "React";
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = React.useState("");
+  const [searchTerm, setSearchTerm] = React.useState("React");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -36,7 +36,7 @@ const App = () => {
     <div>
       <h1>Hello {title}</h1>
 
-      <Search onSearch={handleSearch} />
+      <Search search={searchTerm} onSearch={handleSearch} />
 
       <hr />
       <List list={searchedStories} />
@@ -73,7 +73,12 @@ const Search = (props) => {
   return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={props.onSearch} />
+      <input
+        id="search"
+        type="text"
+        onChange={props.onSearch}
+        value={props.search}
+      />
     </div>
   );
 };
