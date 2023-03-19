@@ -3,7 +3,13 @@ import * as React from "react";
 const title = "React";
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = React.useState("React");
+  const [searchTerm, setSearchTerm] = React.useState(
+    localStorage.getItem("search") || ""
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem("search", searchTerm);
+  }, [searchTerm]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -71,7 +77,7 @@ const Item = (props) => {
 
 const Search = (props) => {
   return (
-    <div>
+    <>
       <label htmlFor="search">Search: </label>
       <input
         id="search"
@@ -79,7 +85,7 @@ const Search = (props) => {
         onChange={props.onSearch}
         value={props.search}
       />
-    </div>
+    </>
   );
 };
 
