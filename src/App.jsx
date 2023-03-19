@@ -42,13 +42,26 @@ const App = () => {
     <div>
       <h1>Hello {title}</h1>
 
-      <Search search={searchTerm} onSearch={handleSearch} />
+      <InputWithLabel
+        id="search"
+        label="Search"
+        value={searchTerm}
+        onInputChange={handleSearch}
+      />
 
       <hr />
       <List list={searchedStories} />
     </div>
   );
 };
+
+const InputWithLabel = ({ id, label, value, type = "text", onInputChange }) => (
+  <>
+    <label htmlFor={id}>{label}</label>
+    &nbsp;
+    <input id={id} type={type} value={value} onChange={onInputChange} />
+  </>
+);
 
 const List = (props) => {
   return (
@@ -72,20 +85,6 @@ const Item = (props) => {
       <span>{props.item.num_comments}</span>
       <span>{props.item.points}</span>
     </li>
-  );
-};
-
-const Search = (props) => {
-  return (
-    <>
-      <label htmlFor="search">Search: </label>
-      <input
-        id="search"
-        type="text"
-        onChange={props.onSearch}
-        value={props.search}
-      />
-    </>
   );
 };
 
